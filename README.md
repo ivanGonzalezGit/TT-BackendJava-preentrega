@@ -67,7 +67,7 @@ Diseñar una aplicación en Java que permita registrar, mostrar y gestionar prod
 
 
 
-### Menú principal interactivo
+### Menú principal interactivo (COMPLETADO)
 
 El programa presentará un menú con opciones, por ejemplo:
 

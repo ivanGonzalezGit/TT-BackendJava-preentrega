@@ -1,0 +1,3 @@
+module interfazConsola {
+    requires ventas;
+}
