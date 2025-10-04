@@ -1,4 +1,4 @@
-package menuInicio;
+package com.techlab.menuInicio;
 
 public class Validacion {
 

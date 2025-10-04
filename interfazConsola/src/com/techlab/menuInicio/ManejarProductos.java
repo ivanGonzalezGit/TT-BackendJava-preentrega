@@ -1,4 +1,6 @@
-package menuInicio;
+package com.techlab.menuInicio;
+
+import com.techlab.producto.Producto;
 
 public class ManejarProductos {
     public static void agregarProducto(){
@@ -11,11 +13,9 @@ public class ManejarProductos {
     public static void buscarProducto(){
         System.out.println("buscó producto");
     }
-
     public static void actualizarProducto(int idProducto){
         System.out.println("actualizó producto");
     }
-
     public static void eliminarProducto(){
         System.out.println("eliminó producto");
     }

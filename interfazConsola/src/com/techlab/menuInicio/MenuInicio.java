@@ -1,4 +1,4 @@
-package menuInicio;
+package com.techlab.menuInicio;
 import java.util.Scanner;
 
 public class MenuInicio {

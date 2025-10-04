@@ -1,4 +1,6 @@
-package menuInicio;
+package com.techlab.menuInicio;
+
+import com.techlab.pedido.Pedido;
 
 public class ManejarPedidos {
 
