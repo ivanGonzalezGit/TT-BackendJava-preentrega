@@ -20,7 +20,7 @@ public class MenuInicio {
                     break;
 
                 case "2":
-                    ManejarProductos.listarProductos();
+                    ManejarProductos.listarProductos(sc);
                     break;
 
                 case "3":
@@ -75,7 +75,7 @@ public class MenuInicio {
         Scanner sc = new Scanner(System.in);
         String opSalida;
 
-        while (true) {// bucle infinito hasta que el return lo corte
+        while (true) {// bucle infinito hasta que el return 7 lo corte
             System.out.print("¿Desea continuar? S/N: ");
             opSalida = sc.nextLine().trim().toLowerCase();
 

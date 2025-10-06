@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Producto {
 
-    private static ArrayList<Producto> listaProductos = new ArrayList<>();
+    public static ArrayList<Producto> listaProductos = new ArrayList<>();
 
     private int id_producto;
     private String nombre;
