@@ -7,30 +7,17 @@ import java.util.ArrayList;
 public class Producto {
 
     public static ArrayList<Producto> listaProductos = new ArrayList<>();
+    private static int contador_id = 0;
 
     private int id_producto;
     private String nombre;
     private double precio;
     private int stock;
 
-    public static void main(String[] args) {
-        // pruebas
-        System.out.println(listaProductos.size());
-        Producto producto1 = new Producto("te DE hIerVAS", 2500, 50);
-        agregarProducto(producto1);
-        System.out.println(listaProductos.size());
-
-        System.out.println(producto1.toString());
-
-        Producto producto2 = new Producto("cafe molido", 2600, 60);
-
-        Producto.mostrarProductos();
-    }
-
     //------------------------------------------------------------------------------------
     // setter y getter de id_producto
-    public void setId_producto() {
-        this.id_producto = listaProductos.size();
+    public void setId_producto(int id_producto) {
+        this.id_producto = id_producto;
     }
     public int getId_producto(){
         return this.id_producto;
@@ -68,7 +55,8 @@ public class Producto {
 
     // Constructor
     public Producto (String nombre, double precio, int stock){
-        setId_producto();
+        contador_id++;
+        setId_producto(contador_id);
         setNombre(nombre);
         setPrecio(precio);
         setStock(stock);
@@ -77,13 +65,13 @@ public class Producto {
     //------------------------------------------------------------------------
 
     // Métodos
-    public static void agregarProducto(Producto producto){
-        listaProductos.add(producto);
-    }
-
     @Override
     public String toString(){
         return "id Producto: " + this.id_producto + " | Nombre: " + this.nombre + " | Precio: $" + this.precio + " | Stock: " +  this.stock + " |";
+    }
+
+    public static void agregarProducto(String nombreProducto, double precioProducto, int stockProducto){
+        Producto nuevoProducto = new Producto(nombreProducto, precioProducto, stockProducto);
     }
 
     public static void mostrarProductos(){
@@ -92,7 +80,26 @@ public class Producto {
         }
     }
 
-    public void removerProducto(){
-        //listaProductos.remove(id_producto);
+    // Buscar por id o nombre
+    public static int buscarProductoPorId(int id_producto) {
+        for(int i=0; i<listaProductos.size() ;i++) {
+            if (listaProductos.get(i).getId_producto() == id_producto) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int buscarProductoPorNombre(String nombreProducto) {
+        for(int i=0; i<listaProductos.size();i++) {
+            if (listaProductos.get(i).getNombre().equalsIgnoreCase(nombreProducto)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void removerProducto(int index){
+        listaProductos.remove(index);
     }
 }

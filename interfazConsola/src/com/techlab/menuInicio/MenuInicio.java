@@ -16,7 +16,7 @@ public class MenuInicio {
             op = sc.nextLine();
             switch (op){
                 case "1":
-                    ManejarProductos.agregarProducto();
+                    ManejarProductos.validacionAgregarProducto();
                     break;
 
                 case "2":
@@ -24,12 +24,13 @@ public class MenuInicio {
                     break;
 
                 case "3":
-                    ManejarProductos.buscarProducto();
+
+                    ManejarProductos.buscarProducto(sc);
                     System.out.println("¿Desea actualizar el producto?");
                     break;
 
                 case "4":
-                    ManejarProductos.eliminarProducto();
+                    ManejarProductos.eliminarProducto(sc);
                     break;
 
                 case "5":
