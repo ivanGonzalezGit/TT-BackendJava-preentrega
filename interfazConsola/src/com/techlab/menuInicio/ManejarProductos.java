@@ -5,18 +5,26 @@ import java.util.Scanner;
 
 public class ManejarProductos {
 
-    public static void validacionAgregarProducto() {
-        Scanner sc = new Scanner(System.in);
+    public static void validacionAgregarProducto(Scanner sc) {
+
+        System.out.println("AGREGAR PRODUCTOS");
 
         // Nombre del producto
         System.out.println("Ingrese el nombre del producto (1/3)");
         String nombreProducto = sc.nextLine();
+
         if (!nombreProducto.isEmpty()) {
             nombreProducto = NobreProducto.productNameFormat(nombreProducto);
         } else {
             System.out.println("El producto debe tener un nombre");
             eleccionContinuarDesdeManejarProductos("Volver a 'Agregar Producto'", sc);
             return; // si el usuario comete un error, corto el método para que no pida los siguientes datos
+        }
+
+        if(Validacion.esProductoRepetido(nombreProducto)){
+            System.out.println("El producto ya fue cargado");
+            eleccionContinuarDesdeManejarProductos("Volver a 'Agregar Producto'", sc);
+            return;
         }
 
         // Precio del producto
@@ -58,47 +66,98 @@ public class ManejarProductos {
         }
     }
 
-    //------------------------------------------------------------------
-    // Separa por tipo de dato
-    public static void buscarProducto(Scanner sc) {
-        ///////// hacer una nueva elección para que el tipo pueda decidir que hacer con lo que buscó
-        System.out.print("Ingrese el nombre o ID del producto: ");
-        String entrada = sc.nextLine();
-        try {
-            int idBusquedaProducto = Integer.parseInt(entrada);
-
-            int idProductoBuscado = Producto.buscarProductoPorId(idBusquedaProducto);
-
-            if(idProductoBuscado>=0){
-                Producto productoEncontrado = Producto.listaProductos.get(idBusquedaProducto);
-                System.out.println(productoEncontrado.toString());
-                System.out.println("1) Actualizar Producto");
-                System.out.println("2) Volver al Menú Inicio");
-                System.out.println("3) Salir");
-                int actualizar = sc.nextInt();
-            }else{
-                System.out.println("Producto no encontrado");
-            }
-
-            ManejarProductos.eleccionContinuarDesdeManejarProductos("Agregar Producto", sc);
-        } catch (NumberFormatException e) {
-            Producto.buscarProductoPorNombre(entrada);
-            ManejarProductos.eleccionContinuarDesdeManejarProductos("Agregar Producto", sc);
-        }
+    public static void buscarProducto(Scanner sc){
+        System.out.println("BUSQUEDA DE PRODUCTO");
+        int indexProducto = buscarProductoPorNombreOID(sc);
+        Producto productoEncontrado = Producto.listaProductos.get(indexProducto);
+        productoEncontrado.toString();
     }
-    //---------------------------------------------------------------
 
-    public static void actualizarProducto(int idProducto) {
-        System.out.println("actualizó producto");
+
+    public static void actualizarProducto(Scanner sc) {
+        System.out.println();
+        System.out.println("ACTUALIZAR PRODUCTO");
+        System.out.println();
+
+        int indexProducto = buscarProductoPorNombreOID(sc);
+        Producto productoEncontrado = Producto.listaProductos.get(indexProducto);
+        productoEncontrado.toString();
+        System.out.println();
+        System.out.println("1) Actualizar Nombre");
+        System.out.println("2) Actualizar Precio");
+        System.out.println("3) Actualizar Stock");
+        System.out.println("4) Volver a Menú Inicio");
+        System.out.println();
+        System.out.println("1) Ingrese una opción: ");
+        String eleccion = sc.nextLine();
+        switch (eleccion){
+            case "1":
+                System.out.print("Ingrese el nuevo nombre: ");
+                String nombre = sc.nextLine();
+                productoEncontrado.setNombre(nombre);
+                productoEncontrado.toString();
+                break;
+
+            case "2":
+                System.out.print("Ingrese el nuevo precio: ");
+                double precio = sc.nextDouble();
+                productoEncontrado.setPrecio(precio);
+                productoEncontrado.toString();
+                break;
+
+            case "3":
+                System.out.print("Ingrese el nuevo stock: ");
+                int stock = sc.nextInt();
+                productoEncontrado.setStock(stock);
+                productoEncontrado.toString();
+                break;
+
+            case "4":
+                MenuInicio.menuDeOpciones();
+                break;
+
+            default:
+                System.out.println("Ingresó una opción inválida");
+        }
     }
 
     public static void eliminarProducto(Scanner sc) {
-        // manejar el error de pedir un id que no existe, se rompe fuera de rango
-        Producto.mostrarProductos();
-        System.out.println("Ingrese el ID o el nombre del producto a eliminar: ");
-        String identificador = sc.nextLine();
-        //Producto.removerProducto(identificador);
+        System.out.println("ELIMINAR PRODUCTO");
+        int indexProducto = buscarProductoPorNombreOID(sc);
+        Producto.removerProducto(indexProducto);
     }
+
+    //------------------------------------------------------------------
+    // Separa por tipo de dato
+    public static int buscarProductoPorNombreOID(Scanner sc) {
+        System.out.print("Ingrese el nombre o ID del producto: ");
+        String entrada = sc.nextLine();
+        int indexProductoEncontrado;
+        try {
+            int idBusquedaProducto = Integer.parseInt(entrada);
+            indexProductoEncontrado = Producto.buscarProductoPorId(idBusquedaProducto);
+
+            if(indexProductoEncontrado>=0){
+                Producto productoEncontrado = Producto.listaProductos.get(indexProductoEncontrado);
+                System.out.println(productoEncontrado.toString());
+                return indexProductoEncontrado;
+            }else{
+                System.out.println("Producto no encontrado");
+                return -1;
+            }
+        } catch (NumberFormatException e) {
+            indexProductoEncontrado = Producto.buscarProductoPorNombre(entrada);
+            if(indexProductoEncontrado>=0){
+                Producto productoEncontrado = Producto.listaProductos.get(indexProductoEncontrado);
+                System.out.println(productoEncontrado.toString());
+                return indexProductoEncontrado;
+            }else{
+                System.out.println("Producto no encontrado");
+                return -1;
+            }
+        }
+    }
+    //---------------------------------------------------------------
 
     public static void eleccionContinuarDesdeManejarProductos(String agregar, Scanner sc) {
         System.out.println();
@@ -111,7 +170,7 @@ public class ManejarProductos {
 
         switch (opcion) {
             case "1":
-                validacionAgregarProducto();
+                validacionAgregarProducto(sc);
                 return;
             case "2":
                 listarProductos(sc);

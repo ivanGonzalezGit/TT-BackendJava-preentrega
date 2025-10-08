@@ -16,7 +16,7 @@ public class MenuInicio {
             op = sc.nextLine();
             switch (op){
                 case "1":
-                    ManejarProductos.validacionAgregarProducto();
+                    ManejarProductos.validacionAgregarProducto(sc);
                     break;
 
                 case "2":
@@ -24,34 +24,31 @@ public class MenuInicio {
                     break;
 
                 case "3":
-
                     ManejarProductos.buscarProducto(sc);
-                    System.out.println("¿Desea actualizar el producto?");
                     break;
 
                 case "4":
-                    ManejarProductos.eliminarProducto(sc);
+                    ManejarProductos.actualizarProducto(sc);
                     break;
 
                 case "5":
-                    ManejarPedidos.crearPedido();
+                    ManejarProductos.eliminarProducto(sc);
                     break;
 
                 case "6":
-                    ManejarPedidos.listarPedidos();
+                    ManejarPedidos.crearPedido();
                     break;
 
                 case "7":
+                    ManejarPedidos.listarPedidos();
+                    break;
+
+                case "8":
                     break;
 
                 default:
                     System.out.println("El valor ingresado no es válido");
             }
-
-            if (!op.equals("7")) {
-                op = eleccionContinuar(); // solo preguntar si no es salir
-            }
-
         } while (!op.equals("7"));
         System.out.println("Programa finalizado");
     }
@@ -63,11 +60,12 @@ public class MenuInicio {
         System.out.println();
         System.out.println("1) Agregar producto");
         System.out.println("2) Listar productos");
-        System.out.println("3) Buscar/actualizar producto");
-        System.out.println("4) Eliminar producto");
-        System.out.println("5) Crear un pedido");
-        System.out.println("6) Listar pedidos");
-        System.out.println("7) Salir");
+        System.out.println("3) Buscar producto");
+        System.out.println("4) Actualizar producto");
+        System.out.println("5) Eliminar producto");
+        System.out.println("6) Crear un pedido");
+        System.out.println("7) Listar pedidos");
+        System.out.println("8) Salir");
         System.out.println();
         System.out.print("Ingrese una opción: ");
     }
