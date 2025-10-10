@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TT-BackendJava-preentrega.iml" filepath="$PROJECT_DIR$/TT-BackendJava-preentrega.iml" />
       <module fileurl="file://$PROJECT_DIR$/interfazConsola/interfazConsola.iml" filepath="$PROJECT_DIR$/interfazConsola/interfazConsola.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utilidadesComunes/utilidadesComunes.iml" filepath="$PROJECT_DIR$/utilidadesComunes/utilidadesComunes.iml" />
       <module fileurl="file://$PROJECT_DIR$/ventas/ventas.iml" filepath="$PROJECT_DIR$/ventas/ventas.iml" />
     </modules>
   </component>

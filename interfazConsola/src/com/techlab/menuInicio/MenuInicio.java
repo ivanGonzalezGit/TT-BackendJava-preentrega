@@ -1,4 +1,7 @@
 package com.techlab.menuInicio;
+import com.techlab.pedido.ManejarPedidos;
+import com.techlab.producto.ManejarProductos;
+
 import java.util.Scanner;
 
 public class MenuInicio {

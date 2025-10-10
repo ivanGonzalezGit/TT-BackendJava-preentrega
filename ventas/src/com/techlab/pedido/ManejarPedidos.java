@@ -1,6 +1,4 @@
-package com.techlab.menuInicio;
-
-import com.techlab.pedido.Pedido;
+package com.techlab.pedido;
 
 public class ManejarPedidos {
 
@@ -12,3 +10,8 @@ public class ManejarPedidos {
         System.out.println("listó pedido");
     }
 }
+
+
+//// idea -- el los manejadores tienen que estar dentro del package del manejado y un paquete para las funcionalidades comunes.
+//// ej: buscar entidad.
+

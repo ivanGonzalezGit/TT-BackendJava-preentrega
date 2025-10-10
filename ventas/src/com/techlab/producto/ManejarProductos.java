@@ -1,6 +1,5 @@
-package com.techlab.menuInicio;
+package com.techlab.producto;
 
-import com.techlab.producto.*;
 import java.util.Scanner;
 
 public class ManejarProductos {
